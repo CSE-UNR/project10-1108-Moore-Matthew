@@ -1,16 +1,13 @@
 //NAME: Matthew Moore
-//DATE: 05-04-2026
+//DATE: 05-01-2026
 //PURPOSE: Combine everything + 2d arrays for project 10
-
 #include <stdio.h>
 #include <stdbool.h>
-
 #define STR_CAP 100
 #define GUESSLIMIT 6
 #define WORDLIMIT 6
 #define BORDERLENGTH 31
 #define INPUTFILE "mystery.txt"
-
 void ReadWordFromFile(FILE *WordPtr, char WordFromFile[]);
 void GetUserGuess(int MaxSize, char CurrentUserGuess[][MaxSize], int CurrentGuess);
 void InputInLowerCase(int const ColumnSize, int const RowNumber, char Guesses[][ColumnSize]);
@@ -20,7 +17,6 @@ void FunctionCompiler(int FinalGuess, int ColCapacity, int RowCapacity, int Line
 void HintChecker(int const ColumnSize, int const RowNumber, char const Answer[], char Guesses[][ColumnSize], char HintsArr[][ColumnSize]);
 void DisplayPastGuesses(int const ColumnSize, int const RowNumber, char const Guesses[][ColumnSize], char const HintsArr[][ColumnSize], int SpaceLength);
 void EndMessage(int const RowNumber, _Bool const Win, int SpaceLength);
-
 int main(){
 	FILE *InputWord;
 	InputWord = fopen(INPUTFILE, "r");
@@ -32,11 +28,9 @@ int main(){
 	fclose(InputWord);
 	return 0;
 }
-
 void ReadWordFromFile(FILE *WordPtr , char Answer[]){
 	fscanf(WordPtr, "%5s", Answer);
 }
-
 void GetUserGuess(int MaxSize, char CurrentUserGuess[][MaxSize], int CurrentGuess){
 	int StringLength = 0;
 	_Bool Symbols = false;
