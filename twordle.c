@@ -16,7 +16,7 @@ void DisplayBorderLine(int const LineLength, char const Symbol);
 void FunctionCompiler(int FinalGuess, int ColCapacity, int RowCapacity, int LineLength, FILE *FilePtr);
 void HintChecker(int const ColumnSize, int const RowNumber, char const Answer[], char Guesses[][ColumnSize], char HintsArr[][ColumnSize]);
 void DisplayPastGuesses(int const ColumnSize, int const RowNumber, char const Guesses[][ColumnSize], char const HintsArr[][ColumnSize], int SpaceLength);
-void EndMessage(int const RowNumber, _Bool const Win, int SpaceLength);
+void EndMessage(int const RowNumber, _Bool const Win, int SpaceLength, char  FinalWord[]);
 int main(){
 	FILE *InputWord;
 	InputWord = fopen(INPUTFILE, "r");
@@ -130,7 +130,7 @@ void DisplayPastGuesses(int const ColumnSize, int const RowNumber, char const Gu
 		}
 	}
 }
-void EndMessage(int const RowNumber, _Bool const Win, int SpaceLength){
+void EndMessage(int const RowNumber, _Bool const Win, int SpaceLength, char FinalWord[]){
 	if(Win != true){
 		printf("you lost, better luck next time!\n");
 	}
@@ -138,7 +138,10 @@ void EndMessage(int const RowNumber, _Bool const Win, int SpaceLength){
 		DisplayBorderLine(SpaceLength, '=');
 		printf("\n");
 		DisplayBorderLine(15, ' ');
-		printf("SOUND\n");
+		for(int i = 0; FinalWord[i] != '\0'; i++){
+			FinalWord[i] -= 32;
+		}
+		printf("%s\n", FinalWord);
 		DisplayBorderLine(7, ' ');
 		printf("You won in %d guess!\n", RowNumber);
 		DisplayBorderLine(15, ' ');
@@ -160,5 +163,5 @@ void FunctionCompiler(int FinalGuess, int ColCapacity, int RowCapacity, int Line
 			GuessCounter++;
 		}
 	}while(GuessCounter < RowCapacity && correct != true);
-	EndMessage(GuessCounter + 1, correct, LineLength);
+	EndMessage(GuessCounter + 1, correct, LineLength, Answer);
 }
